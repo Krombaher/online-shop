@@ -1,0 +1,73 @@
+.header {
+  display: flex;
+  background: #FFFF;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  border-radius: 10px;
+  box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
+
+  p {
+    color: grey;
+  }
+}
+
+.headerLogoTitle {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.headerShopUser {
+  display: flex;
+  align-items: center;
+
+  svg {
+    font-size: 40px;
+    border-radius: 50%;
+    background: #e8e8e8;
+    padding: 10px;
+  }
+
+  span {
+    display: block;
+    font-size: 20px;
+    margin-left: 10px;
+  }
+}
+
+.shopLink {
+  display: flex;
+  align-items: center;
+}
+
+.shopLink:visited {
+  color: grey;
+}
+
+.shopBlock {
+  position: relative;
+}
+
+.shopProductCounter {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #e8e8e8;
+  color: #4c9cee;
+  font-weight: 600;
+  text-align: center;
+}
+
+.shopPriceAll {
+  margin-right: 10px;
+  font-weight: 600;
+  color: gray;
+}
