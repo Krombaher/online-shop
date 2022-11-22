@@ -1,0 +1,33 @@
+.blockMain {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  background: #ffff;
+  border-radius: 10px;
+  box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
+  padding-bottom: 20px;
+}
+
+.productSection {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 15px;
+
+  @media(max-width: 1400px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media(max-width: 1060px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media(max-width: 730px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+
+
+

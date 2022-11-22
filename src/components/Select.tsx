@@ -24,9 +24,10 @@ export const Select = (props: SelectPropsType) => {
         setIsOpen(false)
     }
 
-    const mappedOptionValue = props.categoryBtnData.map(el => {
+    const mappedOptionValue = props.categoryBtnData.map((el,i) => {
         return (
             <div
+                key={i}
                 className={s.optionItem + ' ' + (hoveredItem === el ? s.selected : '')}
                 onClick={() => selectValueHandler(el.name)}
             >

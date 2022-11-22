@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import s from '../src/scss/components/App.module.scss'
 import {Header} from "./components/Header";
 import {Navigate, Route, Routes} from "react-router-dom";
-import {Product} from "./components/Product";
+import {ProductBlock} from "./components/ProductBlock";
 import {Shop} from "./components/Shop";
 import {CategoryBtnDataType, FilterCategoryType, ProductDataType} from "./Types/Type";
 
@@ -13,12 +13,16 @@ type AppPropsType = {
 function App(props:AppPropsType) {
     const [productData, setProductData] = useState<ProductDataType[]>([])
     const [category, setCategory] = useState<string | FilterCategoryType>('Все товары')
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
-    //mocApi
+    //mockApi
     useEffect(() => {
         fetch('https://637bdcd96f4024eac219cbef.mockapi.io/items-shop')
             .then((res) => res.json())
-            .then((arr) => setProductData(arr))
+            .then((arr) => {
+                setProductData(arr)
+                setIsLoading(false)
+            })
     }, [])
 
     //Filter
@@ -36,11 +40,12 @@ function App(props:AppPropsType) {
                 <Route path={'/online-shop'} element={<Navigate to={'/product'}/>}/>
                 <Route path={'/'} element={<Navigate to={'/product'}/>}/>
                 <Route path='/product' element={
-                    <Product
+                    <ProductBlock
                         productData={filteredProduct}
                         category={category}
                         categoryBtnData={props.categoryBtnData}
                         setFilterProduct={setFilterProduct}
+                        isLoading={isLoading}
                     />}/>
                 <Route path='/cart' element={<Shop/>}/>
             </Routes>
