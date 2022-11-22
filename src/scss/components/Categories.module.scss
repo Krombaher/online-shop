@@ -2,11 +2,43 @@
   width: 100%;
   background: #4c9cee;
   border-radius: 5px;
-  height: 60px;
+  padding: 7px 0;
 }
 
 .categories {
   display: flex;
-  padding-left: 10px;
+  justify-content: space-between;
+  align-items: center;
   position: relative;
+  svg {
+    display: block;
+    color: white;
+    font-size: 45px;
+    margin-left: 20px;
+  }
+}
+
+.selectCategories {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 45px;
+  left: 0;
+
+  button {
+    width: 200px;
+    height: 45px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 2px 0;
+    background-color: #e8e8e8;
+    font-size: 18px;
+    font-weight: 600;
+    color: grey;
+  }
+  button:hover {
+    background: #4c9cee;
+    color: white;
+  }
 }

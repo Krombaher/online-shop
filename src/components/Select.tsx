@@ -1,30 +1,30 @@
 import React, {useState, KeyboardEvent} from "react";
 import arrow from '../img/chevron-down.svg';
 import s from '../scss/components/Select.module.scss'
-import {CategoryBtnDataType, FilterCategoryType} from "../Types/Type";
 
 export type SelectPropsType = {
-    category:string | FilterCategoryType
-    categoryBtnData: CategoryBtnDataType[]
-    setFilterProduct: (filter: string | FilterCategoryType) => void
+
 }
 
-export const Select = (props: SelectPropsType) => {
+const value = [
+    {name:'Цена'},
+    {name:'Название'}
+]
+export const Select = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [name, setName] = useState(props.category)
+    const [name, setName] = useState('Цена')
 
-    let hoveredItem = props.categoryBtnData.find(i => i.name === name)
+    let hoveredItem = value.find(i => i.name === name)
 
     const openBlockHandler = () => {
         setIsOpen(!isOpen)
     }
     const selectValueHandler = (name: string) => {
-        props.setFilterProduct(name)
         setName(name)
         setIsOpen(false)
     }
 
-    const mappedOptionValue = props.categoryBtnData.map((el,i) => {
+    const mappedOptionValue = value.map((el,i) => {
         return (
             <div
                 key={i}
@@ -38,11 +38,11 @@ export const Select = (props: SelectPropsType) => {
 
     const onKeyUp = (e: KeyboardEvent<HTMLDivElement>) => {
         if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-            for (let i = 0; i < props.categoryBtnData.length; i++) {
-                if (props.categoryBtnData[i] === hoveredItem) {
+            for (let i = 0; i < value.length; i++) {
+                if (value[i] === hoveredItem) {
                     const nextElement = e.key === 'ArrowDown'
-                        ? props.categoryBtnData[i + 1]
-                        : props.categoryBtnData[i - 1]
+                        ? value[i + 1]
+                        : value[i - 1]
 
                     if (nextElement) {
                         setName(nextElement.name)
@@ -51,7 +51,7 @@ export const Select = (props: SelectPropsType) => {
                 }
             }
 
-            if (!name) setName(props.categoryBtnData[0].name)
+            if (!name) setName(value[0].name)
 
         }
 
