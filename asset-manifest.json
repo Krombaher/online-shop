@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/online-shop/static/css/main.1016d3bd.css",
+    "main.js": "/online-shop/static/js/main.ba75ed64.js",
+    "static/js/787.a8723d96.chunk.js": "/online-shop/static/js/787.a8723d96.chunk.js",
+    "static/media/chevron-down.svg": "/online-shop/static/media/chevron-down.dc1bc44c12d489302229a2b487f9b01b.svg",
+    "index.html": "/online-shop/index.html",
+    "main.1016d3bd.css.map": "/online-shop/static/css/main.1016d3bd.css.map",
+    "main.ba75ed64.js.map": "/online-shop/static/js/main.ba75ed64.js.map",
+    "787.a8723d96.chunk.js.map": "/online-shop/static/js/787.a8723d96.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1016d3bd.css",
+    "static/js/main.ba75ed64.js"
+  ]
+}
