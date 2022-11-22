@@ -33,6 +33,7 @@ function App(props:AppPropsType) {
         <div className={s.container}>
             <Header/>
             <Routes>
+                <Route path={'/online-shop'} element={<Navigate to={'/product'}/>}/>
                 <Route path={'/'} element={<Navigate to={'/product'}/>}/>
                 <Route path='/product' element={
                     <Product

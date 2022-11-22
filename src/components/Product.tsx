@@ -13,6 +13,7 @@ export type ProductPropsType = {
 
 export const Product = (props: ProductPropsType) => {
     const productDataItems = props.productData.map(el => {
+        console.log(el.imgURL)
         return (
             <div key={el.id} className={s.productCard}>
                 <img src={el.imgURL} alt={'img'}/>

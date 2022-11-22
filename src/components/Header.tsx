@@ -2,12 +2,13 @@ import React from "react";
 import s from '../scss/components/Header.module.scss'
 import {GiShoppingCart} from "react-icons/gi";
 import {Link} from "react-router-dom";
+import logo from '../img/fp-logo.jpg'
 
 export const Header = () => {
     return (
         <div className={s.header}>
             <div className={s.headerLogoTitle}>
-                <img src={'/img/fp-logo.jpg'} alt='logo'/>
+                <img src={logo} alt='logo'/>
                 <div>
                     <h2>FeederPro</h2>
                     <p>Магазин рыболовных товаров</p>
