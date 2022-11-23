@@ -3,16 +3,21 @@ import arrow from '../img/chevron-down.svg';
 import s from '../scss/components/Select.module.scss'
 
 export type SelectPropsType = {
-
+    sortItem:string
+    setSortItem:(sortType:string) => void
 }
 
+let desc = '/?sortBy=price&order=desc'
+let asc = '/?sortBy=price&order=asc'
+
 const value = [
-    {name:'Цена'},
-    {name:'Название'}
+    {name:'По цене (сначала дороже)'},
+    {name:'По цене (сначала дешевле)'}
 ]
-export const Select = () => {
+
+export const Select = (props:SelectPropsType) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [name, setName] = useState('Цена')
+    const [name, setName] = useState('Сортировать по:')
 
     let hoveredItem = value.find(i => i.name === name)
 
@@ -22,6 +27,12 @@ export const Select = () => {
     const selectValueHandler = (name: string) => {
         setName(name)
         setIsOpen(false)
+
+        if(name === 'По цене (сначала дороже)') {
+            return props.setSortItem(desc)
+        } else {
+            return props.setSortItem(asc)
+        }
     }
 
     const mappedOptionValue = value.map((el,i) => {

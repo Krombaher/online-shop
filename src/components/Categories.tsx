@@ -9,6 +9,8 @@ export type CategoriesPropsType = {
     category: string | FilterCategoryType
     categoryBtnData: CategoryBtnDataType[]
     setFilterProduct: (filter: string | FilterCategoryType) => void
+    sortItem:string
+    setSortItem:(sortType:string) => void
 }
 
 export const Categories = (props: CategoriesPropsType) => {
@@ -28,7 +30,10 @@ export const Categories = (props: CategoriesPropsType) => {
                         open={open}
                     />
                 }
-                <Select/>
+                <Select
+                    sortItem={props.sortItem}
+                    setSortItem={props.setSortItem}
+                />
             </div>
         </section>
     )

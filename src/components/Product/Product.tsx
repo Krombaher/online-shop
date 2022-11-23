@@ -13,6 +13,7 @@ export type ProductPropsType = {
 }
 
 export const Product = (props: ProductPropsType) => {
+
     return (
         <div key={props.id} className={s.productCard}>
             <img src={props.imgURL} alt={'img'}/>
@@ -24,7 +25,8 @@ export const Product = (props: ProductPropsType) => {
                 <b>{props.price}$</b>
             </div>
             <button
-                className={s.button}>
+                className={s.button}
+            >
                 <TiShoppingCart/>
             </button>
         </div>
