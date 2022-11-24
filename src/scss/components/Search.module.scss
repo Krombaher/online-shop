@@ -1,0 +1,32 @@
+.searchBlock {
+  margin-right: 20px;
+  position: relative;
+  input {
+    resize: none;
+    border: none;
+    outline: none;
+    width: 250px;
+    font-family: 'Montserrat';
+    background: #F5F7FB;
+    border-radius: 20px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 17px;
+    color: gray;
+    opacity: 0.9;
+    padding: 12px 0 12px 50px;
+  }
+
+  svg {
+    display: block;
+    position: absolute;
+    top: 9px;
+    left: 0;
+    font-size: 25px;
+    color: gray;
+  }
+}
+
+
+

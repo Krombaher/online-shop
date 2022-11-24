@@ -4,13 +4,12 @@ import {CategoryBtnDataType, FilterCategoryType} from "../Types/Type";
 import {GiHamburgerMenu} from "react-icons/gi";
 import {SelectCategories} from "./SelectCategories";
 import {Select} from "./Select";
+import {Search} from "./Search";
 
 export type CategoriesPropsType = {
     category: string | FilterCategoryType
     categoryBtnData: CategoryBtnDataType[]
     setFilterProduct: (filter: string | FilterCategoryType) => void
-    sortItem:string
-    setSortItem:(sortType:string) => void
 }
 
 export const Categories = (props: CategoriesPropsType) => {
@@ -30,10 +29,7 @@ export const Categories = (props: CategoriesPropsType) => {
                         open={open}
                     />
                 }
-                <Select
-                    sortItem={props.sortItem}
-                    setSortItem={props.setSortItem}
-                />
+                <Search/>
             </div>
         </section>
     )

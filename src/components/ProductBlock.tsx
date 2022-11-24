@@ -4,18 +4,19 @@ import {CategoryBtnDataType, FilterCategoryType, ProductDataType} from "../Types
 import {Categories} from "./Categories";
 import {Product} from "./Product/Product";
 import {Skeleton} from "./Product/Skeleton";
+import {Select} from "./Select";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../redux/Redux-store";
 
 export type ProductBlockPropsType = {
     productData: ProductDataType[]
     category: string | FilterCategoryType
     categoryBtnData: CategoryBtnDataType[]
     setFilterProduct: (filter: string | FilterCategoryType) => void
-    isLoading: boolean
-    sortItem:string
-    setSortItem:(sortType:string) => void
 }
 
 export const ProductBlock = (props: ProductBlockPropsType) => {
+    const isLoading = useSelector<AppStateType, boolean>(state => state.productData.isLoading)
 
     return (
         <main className={s.blockMain}>
@@ -23,12 +24,11 @@ export const ProductBlock = (props: ProductBlockPropsType) => {
                 category={props.category}
                 categoryBtnData={props.categoryBtnData}
                 setFilterProduct={props.setFilterProduct}
-                sortItem={props.sortItem}
-                setSortItem={props.setSortItem}
             />
             <section className={s.productSection}>
+                <Select/>
                 {
-                    props.isLoading ? [...new Array(8)].map((_, i) => <Skeleton key={i}/>)
+                    isLoading ? [...new Array(8)].map((_, i) => <Skeleton key={i}/>)
                         : props.productData.map(obj => {
                             return (
                                 <Product

@@ -4,51 +4,36 @@ import {Header} from "./components/Header";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {ProductBlock} from "./components/ProductBlock";
 import {Shop} from "./components/Shop";
-import {CategoryBtnDataType, FilterCategoryType, ProductDataType} from "./Types/Type";
+import {CategoryBtnDataType, FilterCategoryType, ProductDataPageType, ProductDataType} from "./Types/Type";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "./redux/Redux-store";
+import {productAPI} from "./Api/Api";
+import {getProductDataAC, setIsLoadingAC} from "./redux/ProductReducer";
 
 type AppPropsType = {
     categoryBtnData: CategoryBtnDataType[]
 }
 
 function App(props:AppPropsType) {
-    const [productData, setProductData] = useState<ProductDataType[]>([])
     const [category, setCategory] = useState<string | FilterCategoryType>('Все товары')
-    const [sortItem, setSortItem] = useState('')
-    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const productData = useSelector<AppStateType, ProductDataPageType>(state => state.productData)
+    const productDispatch = useDispatch()
 
-    //mockApi
     useEffect(() => {
-        setIsLoading(true)
-        fetch(`https://637bdcd96f4024eac219cbef.mockapi.io/items-shop${sortItem}`)
-            .then((res) => res.json())
-            .then((arr) => {
-                setProductData(arr)
-                setIsLoading(false)
-            })
-    }, [sortItem])
-
-    //LocalStorage
-
-    // useEffect(() => {
-    //     let items = localStorage.getItem('shopItems')
-    //     if (items) {
-    //         let newItems = JSON.parse(items)
-    //         setProductData(newItems)
-    //     }
-    // }, [])
-    //
-    // useEffect(() => {
-    //    if(productData.length > 0) localStorage.setItem('shopItems', JSON.stringify(productData))
-    // }, [])
-
+        productDispatch(setIsLoadingAC(true))
+        productAPI.getCatalog().then(response => {
+            productDispatch(getProductDataAC(response))
+            productDispatch(setIsLoadingAC(false))
+        })
+    },[])
 
     //Filter
     const setFilterProduct = (category: string | FilterCategoryType) => {
         setCategory(category)
     }
     let filteredProduct: ProductDataType[]
-    if (category === 'Все товары') filteredProduct = productData
-    else filteredProduct = productData.filter(el => el.category === category)
+    if (category === 'Все товары') filteredProduct = productData.productData
+    else filteredProduct = productData.productData.filter(el => el.category === category)
 
     return (
         <div className={s.container}>
@@ -62,9 +47,6 @@ function App(props:AppPropsType) {
                         category={category}
                         categoryBtnData={props.categoryBtnData}
                         setFilterProduct={setFilterProduct}
-                        isLoading={isLoading}
-                        sortItem={sortItem}
-                        setSortItem={setSortItem}
                     />}/>
                 <Route path='/cart' element={<Shop/>}/>
             </Routes>

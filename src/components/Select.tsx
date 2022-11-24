@@ -1,23 +1,24 @@
 import React, {useState, KeyboardEvent} from "react";
 import arrow from '../img/chevron-down.svg';
 import s from '../scss/components/Select.module.scss'
+import {useDispatch} from "react-redux";
+import {getProductDataAC, setIsLoadingAC} from "../redux/ProductReducer";
+import {productAPI} from "../Api/Api";
 
 export type SelectPropsType = {
-    sortItem:string
-    setSortItem:(sortType:string) => void
+
 }
 
-let desc = '/?sortBy=price&order=desc'
-let asc = '/?sortBy=price&order=asc'
-
 const value = [
-    {name:'По цене (сначала дороже)'},
-    {name:'По цене (сначала дешевле)'}
+    {name:'сначала дорогие'},
+    {name:'сначала дешевые'}
 ]
 
 export const Select = (props:SelectPropsType) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [name, setName] = useState('Сортировать по:')
+    const [name, setName] = useState('Сортировать')
+
+    const productDispatch = useDispatch()
 
     let hoveredItem = value.find(i => i.name === name)
 
@@ -28,10 +29,20 @@ export const Select = (props:SelectPropsType) => {
         setName(name)
         setIsOpen(false)
 
-        if(name === 'По цене (сначала дороже)') {
-            return props.setSortItem(desc)
-        } else {
-            return props.setSortItem(asc)
+        if(name === 'сначала дорогие') {
+            productDispatch(setIsLoadingAC(true))
+            productAPI.getSortCatalog('desc').then(response => {
+                productDispatch(getProductDataAC(response))
+                productDispatch(setIsLoadingAC(false))
+            })
+        }
+
+        if (name === 'сначала дешевые'){
+            productDispatch(setIsLoadingAC(true))
+            productAPI.getSortCatalog('asc').then(response => {
+                productDispatch(getProductDataAC(response))
+                productDispatch(setIsLoadingAC(false))
+            })
         }
     }
 

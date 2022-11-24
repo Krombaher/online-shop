@@ -8,8 +8,9 @@ export type ProductDataType = {
     countBy:number
 }
 
-export type StateType = {
-    productData:ProductDataType[]
+export type ProductDataPageType = {
+    productData: ProductDataType[]
+    isLoading:boolean
 }
 
 export type CategoryBtnDataType = {
