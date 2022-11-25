@@ -3,7 +3,6 @@ import s from '../scss/components/Categories.module.scss'
 import {CategoryBtnDataType, FilterCategoryType} from "../Types/Type";
 import {GiHamburgerMenu} from "react-icons/gi";
 import {SelectCategories} from "./SelectCategories";
-import {Select} from "./Select";
 import {Search} from "./Search";
 
 export type CategoriesPropsType = {
@@ -14,7 +13,7 @@ export type CategoriesPropsType = {
 
 export const Categories = (props: CategoriesPropsType) => {
     const [open, setOpen] = useState<boolean>(true)
-
+    console.log('Categories')
     return (
         <section className={s.categoriesSection}>
             <div className={s.categories}>

@@ -2,7 +2,7 @@ import React from "react"
 import ContentLoader from "react-content-loader"
 import s from '../../scss/components/Product.module.scss'
 
-export const Skeleton = (props) => (
+export const Skeleton = () => (
     <div className={s.skeletonBlock}>
         <div className={s.skeleton}>
             <ContentLoader
@@ -12,7 +12,6 @@ export const Skeleton = (props) => (
                 viewBox="0 0 400 460"
                 backgroundColor="#f3f3f3"
                 foregroundColor="#ecebeb"
-                {...props}
             >
                 <rect x="0" y="307" rx="2" ry="2" width="200" height="10"/>
                 <rect x="0" y="283" rx="2" ry="2" width="200" height="10"/>

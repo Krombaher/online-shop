@@ -1,6 +1,8 @@
 import React from "react";
 import s from '../../scss/components/Product.module.scss'
 import {TiShoppingCart} from "react-icons/ti";
+import {useDispatch} from "react-redux";
+import {buyProductAC} from "../../redux/CartReducer";
 
 export type ProductPropsType = {
     id: string
@@ -12,20 +14,36 @@ export type ProductPropsType = {
     countBy:number
 }
 
-export const Product = (props: ProductPropsType) => {
+export const Product: React.FC<ProductPropsType> = ({id,imgURL,brand,name,category,price,countBy}) => {
+    const dispatch = useDispatch()
+
+    //Create and Add product
+    const onClickAddToCart = () => {
+        const item = {
+            id,
+            imgURL,
+            brand,
+            name,
+            category,
+            price,
+            countBy
+        }
+        dispatch(buyProductAC(item))
+    }
 
     return (
-        <div key={props.id} className={s.productCard}>
-            <img src={props.imgURL} alt={'img'}/>
-            <h3>{props.name}</h3>
-            <span>Category:{props.category}</span>
-            <span>Brand:{props.brand}</span>
+        <div key={id} className={s.productCard}>
+            <img src={imgURL} alt={'img'}/>
+            <h3>{name}</h3>
+            <span>Category:{category}</span>
+            <span>Brand:{brand}</span>
             <div>
                 <span>Price:</span>
-                <b>{props.price}$</b>
+                <b>{price}$</b>
             </div>
             <button
                 className={s.button}
+                onClick={onClickAddToCart}
             >
                 <TiShoppingCart/>
             </button>

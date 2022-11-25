@@ -19,7 +19,7 @@ export const SelectCategories = (props: SelectCategoriesPropsType) => {
         }
 
         return (
-            <button onClick={handler}>{el.name}</button>
+            <button key={i} onClick={handler}>{el.name}</button>
         )
     })
 

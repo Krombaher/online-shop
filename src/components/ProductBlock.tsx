@@ -17,7 +17,7 @@ export type ProductBlockPropsType = {
 
 export const ProductBlock = (props: ProductBlockPropsType) => {
     const isLoading = useSelector<AppStateType, boolean>(state => state.productData.isLoading)
-
+    console.log('ProductBlock')
     return (
         <main className={s.blockMain}>
             <Categories
@@ -31,10 +31,7 @@ export const ProductBlock = (props: ProductBlockPropsType) => {
                     isLoading ? [...new Array(8)].map((_, i) => <Skeleton key={i}/>)
                         : props.productData.map(obj => {
                             return (
-                                <Product
-                                    key={obj.id}
-                                    {...obj}
-                                />
+                                <Product key={obj.id} {...obj}/>
                             )
                         })
                 }

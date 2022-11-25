@@ -21,7 +21,6 @@
   font-weight: 600;
   font-size: 16px;
   color: gray;
-  opacity: 0.9;
 
   span {
     display: block;
@@ -39,7 +38,6 @@
 }
 
 .optionItem {
-  text-align: center;
   width: 200px;
   height: 25px;
   border: 1px solid gray;
@@ -52,13 +50,14 @@
   font-weight: 600;
   font-size: 16px;
   color: gray;
-  opacity: 0.9;
 }
 
 .optionItem:hover {
-  background: #67c6f1;
+  background: #4c9cee;
+  color: white;
 }
 
 .selected {
-  background: #67c6f1;
+  background: #4c9cee;
+  color: white;
 }

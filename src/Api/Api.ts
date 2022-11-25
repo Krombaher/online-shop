@@ -12,10 +12,6 @@ export const productAPI = {
 
     getSortCatalog(sortUrl:string) {
         return instance.get(`items-shop/?sortBy=price&order=${sortUrl}`)
-            .then(response => {
-                console.log(response)
-                return (response.data)
-
-            })
+            .then(response => response.data)
     }
 }

@@ -1,10 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import s from '../src/scss/components/App.module.scss'
 import {Header} from "./components/Header";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {ProductBlock} from "./components/ProductBlock";
-import {Shop} from "./components/Shop";
-import {CategoryBtnDataType, FilterCategoryType, ProductDataPageType, ProductDataType} from "./Types/Type";
+import {Cart} from "./components/Cart";
+import {
+    CategoryBtnDataType,
+    FilterCategoryType,
+    ProductDataPageType,
+    ProductDataType
+} from "./Types/Type";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "./redux/Redux-store";
 import {productAPI} from "./Api/Api";
@@ -14,26 +19,28 @@ type AppPropsType = {
     categoryBtnData: CategoryBtnDataType[]
 }
 
-function App(props:AppPropsType) {
+function App(props: AppPropsType) {
     const [category, setCategory] = useState<string | FilterCategoryType>('Все товары')
-    const productData = useSelector<AppStateType, ProductDataPageType>(state => state.productData)
-    const productDispatch = useDispatch()
+    const productDataItems = useSelector<AppStateType, ProductDataPageType>(state => state.productData)
+    const dispatch = useDispatch()
 
+    //Get data from server
     useEffect(() => {
-        productDispatch(setIsLoadingAC(true))
+        dispatch(setIsLoadingAC(true))
         productAPI.getCatalog().then(response => {
-            productDispatch(getProductDataAC(response))
-            productDispatch(setIsLoadingAC(false))
+            dispatch(getProductDataAC(response))
+            dispatch(setIsLoadingAC(false))
         })
-    },[])
+    }, [])
 
     //Filter
-    const setFilterProduct = (category: string | FilterCategoryType) => {
+    const setFilterProduct = useCallback((category: string | FilterCategoryType) => {
         setCategory(category)
-    }
+    }, [category])
+
     let filteredProduct: ProductDataType[]
-    if (category === 'Все товары') filteredProduct = productData.productData
-    else filteredProduct = productData.productData.filter(el => el.category === category)
+    if (category === 'Все товары') filteredProduct = productDataItems.productData
+    else filteredProduct = productDataItems.productData.filter(el => el.category === category)
 
     return (
         <div className={s.container}>
@@ -48,7 +55,7 @@ function App(props:AppPropsType) {
                         categoryBtnData={props.categoryBtnData}
                         setFilterProduct={setFilterProduct}
                     />}/>
-                <Route path='/cart' element={<Shop/>}/>
+                <Route path='/cart' element={<Cart/>}/>
             </Routes>
         </div>
     );
