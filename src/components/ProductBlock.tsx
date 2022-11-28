@@ -14,7 +14,6 @@ export type ProductBlockPropsType = {
     category: string | FilterCategoryType
     categoryBtnData: CategoryBtnDataType[]
     setFilterProduct: (filter: string | FilterCategoryType) => void
-    setSort:(sort:string) => void
 }
 
 export const ProductBlock = (props: ProductBlockPropsType) => {
@@ -28,9 +27,7 @@ export const ProductBlock = (props: ProductBlockPropsType) => {
                 setFilterProduct={props.setFilterProduct}
             />
             <section className={s.productSection}>
-                <Select
-                    setSort={props.setSort}
-                />
+                <Select/>
                 {
                     isLoading ? props.productData.map((_, i) => <Skeleton key={i}/>)
                         : props.productData.map(obj => {

@@ -13,7 +13,7 @@ export type CategoriesPropsType = {
 
 export const Categories = (props: CategoriesPropsType) => {
     const [open, setOpen] = useState<boolean>(true)
-    console.log('Categories')
+
     return (
         <section className={s.categoriesSection}>
             <div className={s.categories}>

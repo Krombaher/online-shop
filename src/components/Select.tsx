@@ -1,21 +1,20 @@
 import React, {useState, KeyboardEvent} from "react";
 import arrow from '../img/chevron-down.svg';
 import s from '../scss/components/Select.module.scss'
+import {useDispatch} from "react-redux";
+import {setSortPageAC} from "../redux/ProductReducer";
 
-export type SelectPropsType = {
-    setSort:(sort:string) => void
-}
-
-const value = [
+const sortName = [
     {name:'сначала дорогие'},
     {name:'сначала дешевые'}
 ]
 
-export const Select = (props:SelectPropsType) => {
+export const Select = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [name, setName] = useState('Сортировать')
+    const dispatch = useDispatch()
 
-    let hoveredItem = value.find(i => i.name === name)
+    let hoveredItem = sortName.find(i => i.name === name)
 
     const openBlockHandler = () => {
         setIsOpen(!isOpen)
@@ -25,15 +24,15 @@ export const Select = (props:SelectPropsType) => {
         setIsOpen(false)
 
         if(name === 'сначала дорогие') {
-            props.setSort('desc')
+            dispatch(setSortPageAC('desc'))
         }
 
         if (name === 'сначала дешевые'){
-            props.setSort('asc')
+            dispatch(setSortPageAC('asc'))
         }
     }
 
-    const mappedOptionValue = value.map((el,i) => {
+    const mappedOptionValue = sortName.map((el,i) => {
         return (
             <div
                 key={i}
@@ -47,11 +46,11 @@ export const Select = (props:SelectPropsType) => {
 
     const onKeyUp = (e: KeyboardEvent<HTMLDivElement>) => {
         if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-            for (let i = 0; i < value.length; i++) {
-                if (value[i] === hoveredItem) {
+            for (let i = 0; i < sortName.length; i++) {
+                if (sortName[i] === hoveredItem) {
                     const nextElement = e.key === 'ArrowDown'
-                        ? value[i + 1]
-                        : value[i - 1]
+                        ? sortName[i + 1]
+                        : sortName[i - 1]
 
                     if (nextElement) {
                         setName(nextElement.name)
@@ -60,7 +59,7 @@ export const Select = (props:SelectPropsType) => {
                 }
             }
 
-            if (!name) setName(value[0].name)
+            if (!name) setName(sortName[0].name)
 
         }
 

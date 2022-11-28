@@ -13,6 +13,8 @@ export type ProductDataPageType = {
     productData: ProductDataType[]
     isLoading:boolean
     currentPage:number
+    sortValue:string
+    searchValue:string
 }
 
 //Cart type

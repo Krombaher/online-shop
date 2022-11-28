@@ -21,27 +21,28 @@ type AppPropsType = {
 
 function App(props: AppPropsType) {
     const [category, setCategory] = useState<string | FilterCategoryType>('Все товары')
-    const [sort, setSort] = useState<string>('')
-    const productDataItems = useSelector<AppStateType, ProductDataPageType>(state => state.productData)
+    const { currentPage, productData, sortValue, searchValue } = useSelector<AppStateType, ProductDataPageType>(state => state.productData)
+    const search = searchValue ? `&search=${searchValue}` : '';
+
     const dispatch = useDispatch()
 
     //Get data from server
     useEffect(() => {
         dispatch(setIsLoadingAC(true))
-        productAPI.getCatalog(productDataItems.currentPage, sort).then(response => {
+        productAPI.getCatalog(currentPage, sortValue, search).then(response => {
             dispatch(getProductDataAC(response))
             dispatch(setIsLoadingAC(false))
         })
-    }, [productDataItems.currentPage, sort])
+    }, [currentPage, sortValue, search, dispatch])
 
     //Filter
     const setFilterProduct = useCallback((category: string | FilterCategoryType) => {
         setCategory(category)
-    }, [category])
+    }, [])
 
     let filteredProduct: ProductDataType[]
-    if (category === 'Все товары') filteredProduct = productDataItems.productData
-    else filteredProduct = productDataItems.productData.filter(el => el.category === category)
+    if (category === 'Все товары') filteredProduct = productData
+    else filteredProduct = productData.filter(el => el.category === category)
 
     return (
         <div className={s.container}>
@@ -55,7 +56,6 @@ function App(props: AppPropsType) {
                         category={category}
                         categoryBtnData={props.categoryBtnData}
                         setFilterProduct={setFilterProduct}
-                        setSort={setSort}
                     />}/>
                 <Route path='/cart' element={<Cart/>}/>
             </Routes>
