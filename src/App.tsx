@@ -21,17 +21,18 @@ type AppPropsType = {
 
 function App(props: AppPropsType) {
     const [category, setCategory] = useState<string | FilterCategoryType>('Все товары')
+    const [sort, setSort] = useState<string>('')
     const productDataItems = useSelector<AppStateType, ProductDataPageType>(state => state.productData)
     const dispatch = useDispatch()
 
     //Get data from server
     useEffect(() => {
         dispatch(setIsLoadingAC(true))
-        productAPI.getCatalog().then(response => {
+        productAPI.getCatalog(productDataItems.currentPage, sort).then(response => {
             dispatch(getProductDataAC(response))
             dispatch(setIsLoadingAC(false))
         })
-    }, [])
+    }, [productDataItems.currentPage, sort])
 
     //Filter
     const setFilterProduct = useCallback((category: string | FilterCategoryType) => {
@@ -54,6 +55,7 @@ function App(props: AppPropsType) {
                         category={category}
                         categoryBtnData={props.categoryBtnData}
                         setFilterProduct={setFilterProduct}
+                        setSort={setSort}
                     />}/>
                 <Route path='/cart' element={<Cart/>}/>
             </Routes>

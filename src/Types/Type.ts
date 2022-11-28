@@ -12,6 +12,7 @@ export type ProductDataType = {
 export type ProductDataPageType = {
     productData: ProductDataType[]
     isLoading:boolean
+    currentPage:number
 }
 
 //Cart type

@@ -1,12 +1,9 @@
 import React, {useState, KeyboardEvent} from "react";
 import arrow from '../img/chevron-down.svg';
 import s from '../scss/components/Select.module.scss'
-import {useDispatch} from "react-redux";
-import {getProductDataAC, setIsLoadingAC} from "../redux/ProductReducer";
-import {productAPI} from "../Api/Api";
 
 export type SelectPropsType = {
-
+    setSort:(sort:string) => void
 }
 
 const value = [
@@ -18,8 +15,6 @@ export const Select = (props:SelectPropsType) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [name, setName] = useState('Сортировать')
 
-    const productDispatch = useDispatch()
-
     let hoveredItem = value.find(i => i.name === name)
 
     const openBlockHandler = () => {
@@ -30,19 +25,11 @@ export const Select = (props:SelectPropsType) => {
         setIsOpen(false)
 
         if(name === 'сначала дорогие') {
-            productDispatch(setIsLoadingAC(true))
-            productAPI.getSortCatalog('desc').then(response => {
-                productDispatch(getProductDataAC(response))
-                productDispatch(setIsLoadingAC(false))
-            })
+            props.setSort('desc')
         }
 
         if (name === 'сначала дешевые'){
-            productDispatch(setIsLoadingAC(true))
-            productAPI.getSortCatalog('asc').then(response => {
-                productDispatch(getProductDataAC(response))
-                productDispatch(setIsLoadingAC(false))
-            })
+            props.setSort('asc')
         }
     }
 

@@ -5,13 +5,8 @@ const instance = axios.create({
 })
 
 export const productAPI = {
-    getCatalog() {
-        return instance.get('items-shop')
-            .then(response => response.data)
-    },
-
-    getSortCatalog(sortUrl:string) {
-        return instance.get(`items-shop/?sortBy=price&order=${sortUrl}`)
+    getCatalog(page: number, sort:string) {
+        return instance.get(`items-shop?page=${page}&limit=4&sortBy=price&order=${sort}`)
             .then(response => response.data)
     }
 }

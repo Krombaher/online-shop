@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import s from '../scss/components/Header.module.scss'
 import {GiShoppingCart} from "react-icons/gi";
 import {Link} from "react-router-dom";
@@ -9,6 +9,7 @@ import {CartDataPageType} from "../Types/Type";
 
 export const Header = () => {
     const { cartItems, totalPrice } = useSelector<AppStateType, CartDataPageType>((state) => state.cartData)
+
     let price = cartItems.reduce((sum, current) => sum + current.price * current.countBy, 0)
     let amountItems = cartItems.map(item => item.countBy).reduce((a, b) => a + b, 0)
 

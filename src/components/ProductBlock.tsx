@@ -7,17 +7,19 @@ import {Skeleton} from "./Product/Skeleton";
 import {Select} from "./Select";
 import {useSelector} from "react-redux";
 import {AppStateType} from "../redux/Redux-store";
+import {Pagination} from "./Pagination";
 
 export type ProductBlockPropsType = {
     productData: ProductDataType[]
     category: string | FilterCategoryType
     categoryBtnData: CategoryBtnDataType[]
     setFilterProduct: (filter: string | FilterCategoryType) => void
+    setSort:(sort:string) => void
 }
 
 export const ProductBlock = (props: ProductBlockPropsType) => {
     const isLoading = useSelector<AppStateType, boolean>(state => state.productData.isLoading)
-    console.log('ProductBlock')
+
     return (
         <main className={s.blockMain}>
             <Categories
@@ -26,9 +28,11 @@ export const ProductBlock = (props: ProductBlockPropsType) => {
                 setFilterProduct={props.setFilterProduct}
             />
             <section className={s.productSection}>
-                <Select/>
+                <Select
+                    setSort={props.setSort}
+                />
                 {
-                    isLoading ? [...new Array(8)].map((_, i) => <Skeleton key={i}/>)
+                    isLoading ? props.productData.map((_, i) => <Skeleton key={i}/>)
                         : props.productData.map(obj => {
                             return (
                                 <Product key={obj.id} {...obj}/>
@@ -36,6 +40,9 @@ export const ProductBlock = (props: ProductBlockPropsType) => {
                         })
                 }
             </section>
+            <div>
+                <Pagination/>
+            </div>
         </main>
     )
 }

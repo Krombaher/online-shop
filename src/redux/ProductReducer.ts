@@ -1,13 +1,15 @@
 import {ProductDataPageType, ProductDataType} from "../Types/Type";
 
-type ActionType = GetProductDataAT | SetIsLoadingAT
+type ActionType = GetProductDataAT | SetIsLoadingAT | SetCurrentPageAT
 
 type GetProductDataAT = ReturnType<typeof getProductDataAC>
 type SetIsLoadingAT = ReturnType<typeof setIsLoadingAC>
+type SetCurrentPageAT = ReturnType<typeof setCurrentPageAC>
 
 let initialState: ProductDataPageType = {
     productData: [],
-    isLoading: false
+    isLoading: false,
+    currentPage: 1
 }
 
 export const productReducer = (state = initialState, action: ActionType):ProductDataPageType => {
@@ -17,6 +19,9 @@ export const productReducer = (state = initialState, action: ActionType):Product
 
         case 'SET_PRODUCT_LOADING':
             return {...state, isLoading: action.isLoading}
+
+        case 'SET_CURRENT_PAGE':
+            return {...state, currentPage: action.currentPage}
 
         default:
             return state
@@ -29,5 +34,9 @@ export const getProductDataAC = (productData:ProductDataType[]) => {
 
 export const setIsLoadingAC = (isLoading: boolean) => {
     return {type: 'SET_PRODUCT_LOADING', isLoading} as const
+}
+
+export const setCurrentPageAC = (currentPage: number) => {
+    return {type: 'SET_CURRENT_PAGE', currentPage} as const
 }
 

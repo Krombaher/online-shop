@@ -11,6 +11,7 @@ export type SelectCategoriesPropsType = {
 }
 
 export const SelectCategories = (props: SelectCategoriesPropsType) => {
+    let active = props.categoryBtnData.find(el => el.name === props.category)
 
     const buttonItems = props.categoryBtnData.map((el, i) => {
         const handler = () => {
@@ -19,7 +20,12 @@ export const SelectCategories = (props: SelectCategoriesPropsType) => {
         }
 
         return (
-            <button key={i} onClick={handler}>{el.name}</button>
+            <button
+                className={s.categoriesBtn + ' ' + (active === el ? s.categoriesBtnActive : '')}
+                key={i}
+                onClick={handler}>
+                {el.name}
+            </button>
         )
     })
 

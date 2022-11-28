@@ -25,21 +25,27 @@
   z-index: 10;
   top: 45px;
   left: 0;
+}
 
-  button {
-    width: 200px;
-    height: 45px;
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 2px 0;
-    background-color: #e8e8e8;
-    font-size: 18px;
-    font-weight: 600;
-    color: grey;
-  }
-  button:hover {
-    background: #4c9cee;
-    color: white;
-  }
+.categoriesBtn {
+  width: 200px;
+  height: 45px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px 0;
+  background-color: #e8e8e8;
+  font-size: 18px;
+  font-weight: 600;
+  color: grey;
+}
+
+.categoriesBtn:hover {
+  background: #4c9cee;
+  color: white;
+}
+
+.categoriesBtnActive {
+  background: #4c9cee;
+  color: white;
 }
