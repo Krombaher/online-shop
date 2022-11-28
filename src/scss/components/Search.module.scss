@@ -1,6 +1,9 @@
 .searchBlock {
   margin-right: 20px;
   position: relative;
+  @media(max-width: 450px) {
+    margin-right: 10px;
+  }
   input {
     resize: none;
     border: none;
