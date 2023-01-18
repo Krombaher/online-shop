@@ -1,7 +1,8 @@
-import {combineReducers, legacy_createStore} from "redux";
+import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import {productReducer} from "./ProductReducer";
 import {cartReducer} from "./CartReducer";
 import {loadState, saveSate} from "./LocalStoradge";
+import thunk from "redux-thunk";
 
 export let rootReducer = combineReducers( {
     productData: productReducer,
@@ -9,7 +10,7 @@ export let rootReducer = combineReducers( {
 })
 
 const persistedState = loadState();
-export let store = legacy_createStore(rootReducer, persistedState)
+export let store = legacy_createStore(rootReducer, persistedState, applyMiddleware(thunk))
 
 store.subscribe(() => {
     saveSate({

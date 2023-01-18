@@ -32,7 +32,7 @@ export const Product: React.FC<ProductPropsType> = ({id,imgURL,brand,name,catego
     }
 
     return (
-        <div key={id} className={s.productCard}>
+        <div key={id} className={s.productCard} onClick={() => console.log(id)}>
             <img src={imgURL} alt={'img'}/>
             <h3>{name}</h3>
             <span>Category:{category}</span>

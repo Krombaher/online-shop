@@ -13,7 +13,7 @@ export const Pagination = () => {
             nextLabel=">"
             onPageChange={(e) => dispatch(setCurrentPageAC(e.selected + 1))}
             pageRangeDisplayed={4}
-            pageCount={3}
+            pageCount={2}
             previousLabel="<"
         />
     )

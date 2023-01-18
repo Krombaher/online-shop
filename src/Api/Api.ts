@@ -1,12 +1,16 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: 'https://637bdcd96f4024eac219cbef.mockapi.io/'
+    baseURL: 'https://63bee7d3f5cfc0949b647da0.mockapi.io/'
+
 })
 
 export const productAPI = {
-    getCatalog(page: number, sort:string, searchValue:string) {
-        return instance.get(`items-shop?page=${page}&limit=4&sortBy=price&order=${sort}${searchValue}`)
-            .then(response => response.data)
+    getCatalog(currentPage: number, sortValue: string, searchValue: string) {
+        const search = searchValue ? `&name=${searchValue}` : '';
+        const sort = sortValue ? `&sortBy=price&order=${sortValue}` : '';
+
+        return instance.get(`shopItems?page=${currentPage}&limit=4${sort}${search}`)
+            .then(response => {return response.data})
     }
 }

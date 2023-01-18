@@ -10,10 +10,10 @@ import {
     ProductDataPageType,
     ProductDataType
 } from "./Types/Type";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {AppStateType} from "./redux/Redux-store";
-import {productAPI} from "./Api/Api";
-import {getProductDataAC, setIsLoadingAC} from "./redux/ProductReducer";
+import {getCatalogTC} from "./redux/ProductReducer";
+import {useAppDispatch} from "./hooks/react-redux-hooks";
 
 type AppPropsType = {
     categoryBtnData: CategoryBtnDataType[]
@@ -22,19 +22,11 @@ type AppPropsType = {
 function App(props: AppPropsType) {
     const [category, setCategory] = useState<string | FilterCategoryType>('Все товары')
     const { currentPage, productData, sortValue, searchValue } = useSelector<AppStateType, ProductDataPageType>(state => state.productData)
-    const search = searchValue ? `&search=${searchValue}` : '';
-
-    const dispatch = useDispatch()
-
+    const dispatch = useAppDispatch()
     //Get data from server
     useEffect(() => {
-        dispatch(setIsLoadingAC(true))
-        productAPI.getCatalog(currentPage, sortValue, search).then(response => {
-            dispatch(getProductDataAC(response))
-            dispatch(setIsLoadingAC(false))
-        })
-    }, [currentPage, sortValue, search, dispatch])
-
+        dispatch(getCatalogTC(currentPage, sortValue, searchValue))
+    }, [currentPage, sortValue, searchValue, dispatch])
     //Filter
     const setFilterProduct = useCallback((category: string | FilterCategoryType) => {
         setCategory(category)

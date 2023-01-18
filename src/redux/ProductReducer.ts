@@ -1,6 +1,8 @@
 import {ProductDataPageType, ProductDataType} from "../Types/Type";
+import {productAPI} from "../Api/Api";
+import {Dispatch} from "react";
 
-type ActionType = GetProductDataAT | SetIsLoadingAT | SetCurrentPageAT | SetSortPageAT | SetSearchValueAT
+export type ActionType = GetProductDataAT | SetIsLoadingAT | SetCurrentPageAT | SetSortPageAT | SetSearchValueAT
 
 type GetProductDataAT = ReturnType<typeof getProductDataAC>
 type SetIsLoadingAT = ReturnType<typeof setIsLoadingAC>
@@ -16,7 +18,7 @@ let initialState: ProductDataPageType = {
     searchValue: ''
 }
 
-export const productReducer = (state = initialState, action: ActionType):ProductDataPageType => {
+export const productReducer = (state = initialState, action: ActionType): ProductDataPageType => {
     switch (action.type) {
         case 'GET_PRODUCT_DATA':
             return {...state, productData: [...action.productData]}
@@ -28,17 +30,17 @@ export const productReducer = (state = initialState, action: ActionType):Product
             return {...state, currentPage: action.currentPage}
 
         case 'SET_SORT_PAGE':
-           return {...state, sortValue: action.sortValue}
+            return {...state, sortValue: action.sortValue}
 
         case 'SET_SEARCH_VALUE':
-            return { ...state, searchValue: action.searchValue}
+            return {...state, searchValue: action.searchValue}
 
         default:
             return state
     }
 }
 
-export const getProductDataAC = (productData:ProductDataType[]) => {
+export const getProductDataAC = (productData: ProductDataType[]) => {
     return {type: 'GET_PRODUCT_DATA', productData} as const
 }
 
@@ -56,5 +58,14 @@ export const setSortPageAC = (sortValue: string) => {
 
 export const setSearchValueAc = (searchValue: string) => {
     return {type: 'SET_SEARCH_VALUE', searchValue} as const
+}
+
+export const getCatalogTC = (currentPage: number, sortValue: string, searchValue: string) => (dispatch: Dispatch<ActionType>) => {
+    dispatch(setIsLoadingAC(true))
+    productAPI.getCatalog(currentPage, sortValue, searchValue)
+        .then(response => {
+        dispatch(getProductDataAC(response))
+        dispatch(setIsLoadingAC(false))
+    })
 }
 

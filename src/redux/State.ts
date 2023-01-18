@@ -2,7 +2,7 @@ export const categoryBtnData = [
     {name: 'Все товары'},
     {name: 'Багаж'},
     {name: 'Катушка'},
-    {name: 'Акссесуары'},
+    {name: 'Аксеcсуары'},
     {name: 'Платформа'},
     {name: 'Удилища'},
     {name: 'Прикормка'},
