@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/online-shop/static/css/main.1e752e83.css",
-    "main.js": "/online-shop/static/js/main.61f316b4.js",
+    "main.css": "/online-shop/static/css/main.cc05363c.css",
+    "main.js": "/online-shop/static/js/main.bd2b55dd.js",
     "static/js/787.a8723d96.chunk.js": "/online-shop/static/js/787.a8723d96.chunk.js",
     "static/media/chevron-down.svg": "/online-shop/static/media/chevron-down.dc1bc44c12d489302229a2b487f9b01b.svg",
     "index.html": "/online-shop/index.html",
-    "main.1e752e83.css.map": "/online-shop/static/css/main.1e752e83.css.map",
-    "main.61f316b4.js.map": "/online-shop/static/js/main.61f316b4.js.map",
+    "main.cc05363c.css.map": "/online-shop/static/css/main.cc05363c.css.map",
+    "main.bd2b55dd.js.map": "/online-shop/static/js/main.bd2b55dd.js.map",
     "787.a8723d96.chunk.js.map": "/online-shop/static/js/787.a8723d96.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1e752e83.css",
-    "static/js/main.61f316b4.js"
+    "static/css/main.cc05363c.css",
+    "static/js/main.bd2b55dd.js"
   ]
 }
